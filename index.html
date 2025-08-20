@@ -32,7 +32,7 @@
             <div class="search-container">
                 <label class="search-label">SEARCH</label>
                 <div class="search-input-wrapper">
-                    <input type="text" class="search-input" id="main-search" placeholder="d" autocomplete="off">
+                    <input type="text" class="search-input" id="main-search" placeholder="" autocomplete="off">
                     <button class="search-button" type="submit" id="search-btn">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="11" cy="11" r="8"></circle>
@@ -41,6 +41,15 @@
                     </button>
                 </div>
                 <div class="search-results-container" id="search-results"></div>
+            </div>
+        </div>
+
+        <div class="recent-section">
+            <div class="recent-header">
+                <span class="recent-label">RECENT UPDATES</span>
+            </div>
+            <div class="recent-list" id="recent-list">
+                <!-- 최근 업데이트 목록이 여기에 표시됩니다 -->
             </div>
         </div>
 
@@ -72,15 +81,32 @@
             // 검색 함수
             function performSearch() {
                 const query = searchInput.value.trim();
+                const recentSection = document.querySelector('.recent-section');
                 
                 if (query.length === 0) {
-                    resultsContainer.style.display = 'none';
+                    resultsContainer.classList.remove('show');
+                    setTimeout(() => {
+                        resultsContainer.style.display = 'none';
+                    }, 300);
+                    if (recentSection) {
+                        recentSection.classList.remove('search-active');
+                    }
                     return;
                 }
                 
                 const results = searchContent(query);
                 displaySearchResults(results, resultsContainer);
                 resultsContainer.style.display = 'block';
+                
+                // fade in 효과
+                setTimeout(() => {
+                    resultsContainer.classList.add('show');
+                }, 10);
+                
+                // 검색 중일 때 최근 업데이트 섹션을 위로 이동
+                if (recentSection) {
+                    recentSection.classList.add('search-active');
+                }
             }
             
             // 실시간 검색
@@ -106,9 +132,22 @@
             // 외부 클릭 시 결과 숨김
             document.addEventListener('click', function(e) {
                 if (!e.target.closest('.search-container')) {
-                    resultsContainer.style.display = 'none';
+                    resultsContainer.classList.remove('show');
+                    setTimeout(() => {
+                        resultsContainer.style.display = 'none';
+                    }, 300);
+                    const recentSection = document.querySelector('.recent-section');
+                    if (recentSection && searchInput.value.trim() === '') {
+                        recentSection.classList.remove('search-active');
+                    }
                 }
             });
+            
+            // 최근 업데이트 표시
+            const recentListContainer = document.getElementById('recent-list');
+            if (recentListContainer) {
+                displayRecentUpdates(recentListContainer);
+            }
         });
     </script>
 </body>

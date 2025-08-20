@@ -33,79 +33,118 @@
                         <div class="content-meta">
                             <span class="meta-date">2024.08.20</span>
                             <span class="meta-separator">·</span>
-                            <span class="meta-category">디자인</span>
-                            <span class="meta-separator">·</span>
-                            <span class="meta-readtime">5분 읽기</span>
+                            <span class="meta-keyword">타이포그래피</span>
+                            <span class="meta-keyword">스위스디자인</span>
+                            <span class="meta-keyword">미니멀리즘</span>
+                            <span class="meta-keyword">헬베티카</span>
                         </div>
                     </header>
 
                     <nav class="table-of-contents">
-                        <h3>목차</h3>
-                        <ol>
-                            <li><a href="#overview">개요</a></li>
-                            <li>
-                                <a href="#features">주요 특징</a>
-                                <ol>
-                                    <li><a href="#typography">대표적인 서체</a></li>
-                                </ol>
-                            </li>
-                            <li><a href="#influence">영향</a></li>
-                            <li><a href="#references">참고 링크</a></li>
-                        </ol>
+                        <div class="toc-header">
+                            <h3>목차</h3>
+                            <button class="toc-toggle" id="toc-toggle">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="m6 9 6 6 6-6"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="toc-content" id="toc-content">
+                            <ol>
+                                <li><a href="#overview">개요</a></li>
+                                <li>
+                                    <a href="#features">주요 특징</a>
+                                    <ol>
+                                        <li><a href="#typography">대표적인 서체</a></li>
+                                    </ol>
+                                </li>
+                                <li><a href="#influence">영향</a></li>
+                                <li><a href="#references">참고 링크</a></li>
+                            </ol>
+                        </div>
                     </nav>
 
                     <section class="content-body">
                             <div id="overview" class="content-section">
-                                <h2>개요</h2>
-                                <p>스위스 타이포그래피(Swiss Typography) 또는 국제 타이포그래피 양식(International Typographic Style)은 1950년대 스위스에서 시작된 그래픽 디자인 운동입니다.</p>
+                                <div class="section-header">
+                                    <h2>개요</h2>
+                                    <button class="section-toggle" data-section="overview-content">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="m6 9 6 6 6-6"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="section-content" id="overview-content">
+                                    <p>스위스 타이포그래피(Swiss Typography) 또는 국제 타이포그래피 양식(International Typographic Style)은 1950년대 스위스에서 시작된 그래픽 디자인 운동입니다.</p>
+                                </div>
                             </div>
 
                             <div id="features" class="content-section">
-                                <h2>주요 특징</h2>
-                                <ul>
-                                    <li>깔끔하고 읽기 쉬운 산세리프 서체 사용</li>
-                                    <li>비대칭적이지만 수학적으로 구성된 레이아웃</li>
-                                    <li>충분한 여백 공간</li>
-                                    <li>제한된 색상 팔레트</li>
-                                    <li>기능성과 명확성 중시</li>
-                                </ul>
+                                <div class="section-header">
+                                    <h2>주요 특징</h2>
+                                    <button class="section-toggle" data-section="features-content">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="m6 9 6 6 6-6"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="section-content" id="features-content">
+                                    <ul>
+                                        <li>깔끔하고 읽기 쉬운 산세리프 서체 사용</li>
+                                        <li>비대칭적이지만 수학적으로 구성된 레이아웃</li>
+                                        <li>충분한 여백 공간</li>
+                                        <li>제한된 색상 팔레트</li>
+                                        <li>기능성과 명확성 중시</li>
+                                    </ul>
 
-                                <div id="typography" class="content-subsection">
-                                    <h3>대표적인 서체</h3>
-                                    <div class="info-box">
-                                        <h4>Helvetica</h4>
-                                        <p>1957년 Max Miedinger가 디자인한 산세리프 서체로, 스위스 타이포그래피의 상징적인 서체입니다.</p>
+                                    <div id="typography" class="content-subsection">
+                                        <h3>대표적인 서체</h3>
+                                        <div class="info-box">
+                                            <h4>Helvetica</h4>
+                                            <p>1957년 Max Miedinger가 디자인한 산세리프 서체로, 스위스 타이포그래피의 상징적인 서체입니다.</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div id="influence" class="content-section">
-                                <h2>영향</h2>
-                                <p>현대 웹 디자인과 UI/UX 디자인에 큰 영향을 미쳤으며, 미니멀리즘 디자인 철학의 기초가 되었습니다.</p>
+                                <div class="section-header">
+                                    <h2>영향</h2>
+                                    <button class="section-toggle" data-section="influence-content">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="m6 9 6 6 6-6"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="section-content" id="influence-content">
+                                    <p>현대 웹 디자인과 UI/UX 디자인에 큰 영향을 미쳤으며, 미니멀리즘 디자인 철학의 기초가 되었습니다.</p>
 
-                                <blockquote class="quote">
-                                    "타이포그래피는 언어에 시각적 형태를 부여하는 것이다." - Adrian Frutiger
-                                </blockquote>
+                                    <blockquote class="quote">
+                                        "타이포그래피는 언어에 시각적 형태를 부여하는 것이다." - Adrian Frutiger
+                                    </blockquote>
+                                </div>
                             </div>
 
                             <div id="references" class="content-section">
-                                <h3>참고 링크</h3>
-                                <ul class="link-list">
-                                    <li><a href="#" class="external-link">Wikipedia: International Typographic Style</a></li>
-                                    <li><a href="#" class="external-link">Helvetica Documentary</a></li>
-                                    <li><a href="#" class="external-link">Swiss Design History</a></li>
-                                </ul>
+                                <div class="section-header">
+                                    <h3>참고 링크</h3>
+                                    <button class="section-toggle" data-section="references-content">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="m6 9 6 6 6-6"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="section-content" id="references-content">
+                                    <ul class="link-list">
+                                        <li><a href="#" class="external-link">Wikipedia: International Typographic Style</a></li>
+                                        <li><a href="#" class="external-link">Helvetica Documentary</a></li>
+                                        <li><a href="#" class="external-link">Swiss Design History</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </section>
 
                     <footer class="content-footer">
-                        <div class="tags">
-                            <span class="tag">타이포그래피</span>
-                            <span class="tag">스위스디자인</span>
-                            <span class="tag">미니멀리즘</span>
-                            <span class="tag">헬베티카</span>
-                        </div>
-                        
                         <div class="edit-info">
                             <p>마지막 수정: 2024년 8월 20일</p>
                         </div>
@@ -147,5 +186,49 @@
             </div>
         </article>
     </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 목차 토글
+            const tocToggle = document.getElementById('toc-toggle');
+            const tocContent = document.getElementById('toc-content');
+            
+            if (tocToggle && tocContent) {
+                tocToggle.addEventListener('click', function() {
+                    const isCollapsed = tocContent.classList.contains('collapsed');
+                    
+                    if (isCollapsed) {
+                        tocContent.classList.remove('collapsed');
+                        tocToggle.classList.remove('collapsed');
+                    } else {
+                        tocContent.classList.add('collapsed');
+                        tocToggle.classList.add('collapsed');
+                    }
+                });
+            }
+            
+            // 섹션 토글
+            const sectionToggles = document.querySelectorAll('.section-toggle');
+            
+            sectionToggles.forEach(function(toggle) {
+                toggle.addEventListener('click', function() {
+                    const targetId = toggle.getAttribute('data-section');
+                    const targetContent = document.getElementById(targetId);
+                    
+                    if (targetContent) {
+                        const isCollapsed = targetContent.classList.contains('collapsed');
+                        
+                        if (isCollapsed) {
+                            targetContent.classList.remove('collapsed');
+                            toggle.classList.remove('collapsed');
+                        } else {
+                            targetContent.classList.add('collapsed');
+                            toggle.classList.add('collapsed');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
