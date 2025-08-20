@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plain0712</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="container">
+        <header class="header">
+            <div class="header-left">
+                <span class="date">AUG.2024</span>
+            </div>
+            <div class="header-right">
+                <span class="type">PERSONAL ARCHIVE</span>
+            </div>
+        </header>
+
+        <div class="title-section">
+            <h1 class="main-title">PLAIN<br>0712</h1>
+            <div class="subtitle-block">
+                <span class="subtitle">개인 아카이브</span>
+                <span class="version">VER. 2.0</span>
+            </div>
+        </div>
+
+        <div class="search-section">
+            <div class="search-container">
+                <label class="search-label">SEARCH</label>
+                <div class="search-input-wrapper">
+                    <input type="text" class="search-input" id="main-search" placeholder="d" autocomplete="off">
+                    <button class="search-button" type="submit" id="search-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="search-results-container" id="search-results"></div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-left">
+                <div class="footer-item">
+                    <span class="footer-label">CONTACT</span>
+                    <span class="footer-info">plain0712@example.com</span>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-item">
+                    <span class="footer-label">UPDATED</span>
+                    <span class="footer-info">20.08.2024</span>
+                </div>
+            </div>
+        </footer>
+    </main>
+    
+    <script src="search-data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('main-search');
+            const searchButton = document.getElementById('search-btn');
+            const resultsContainer = document.getElementById('search-results');
+            
+            let searchTimeout;
+            
+            // 검색 함수
+            function performSearch() {
+                const query = searchInput.value.trim();
+                
+                if (query.length === 0) {
+                    resultsContainer.style.display = 'none';
+                    return;
+                }
+                
+                const results = searchContent(query);
+                displaySearchResults(results, resultsContainer);
+                resultsContainer.style.display = 'block';
+            }
+            
+            // 실시간 검색
+            searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(performSearch, 300);
+            });
+            
+            // 검색 버튼 클릭
+            searchButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                performSearch();
+            });
+            
+            // Enter 키 검색
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    performSearch();
+                }
+            });
+            
+            // 외부 클릭 시 결과 숨김
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.search-container')) {
+                    resultsContainer.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
