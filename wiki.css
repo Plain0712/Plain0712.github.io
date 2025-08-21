@@ -219,23 +219,24 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--spacing-sm) 0;
-    margin-bottom: var(--spacing-md);
+    padding: 0 0 var(--spacing-sm) 0;
+    margin-bottom: 0;
+    border-bottom: 2px solid var(--color-primary);  /* 굵은 하단 선 추가 */
 }
 
 .table-of-contents h3 {
-    font-size: 0.875rem;
-    font-weight: 600;
+    font-size: 0.875rem;  /* 크기 다시 조정 */
+    font-weight: 500;  /* 굵기 조정 */
     color: var(--color-primary);
     margin: 0;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.15em;  /* 자간 더 넓게 */
     text-transform: uppercase;
 }
 
 .toc-toggle {
     background: none;
     border: none;
-    color: var(--color-secondary);
+    color: var(--color-primary);  /* 검정색으로 변경 */
     cursor: pointer;
     padding: var(--spacing-xs);
     display: flex;
@@ -251,7 +252,7 @@
 }
 
 .toc-toggle:hover {
-    color: var(--color-primary);
+    opacity: 0.6;  /* 호버시 투명도 변경 */
 }
 
 .toc-toggle.collapsed {
@@ -259,9 +260,9 @@
 }
 
 .toc-content {
-    background-color: rgba(0, 0, 0, 0.02);
-    border: 1px solid var(--color-light);
-    padding: var(--spacing-md);
+    background-color: transparent;  /* 배경 제거 */
+    border: none;  /* 테두리 제거 */
+    padding: var(--spacing-lg) 0;  /* 위아래 패딩만 */
     transition: all 0.3s ease;
     overflow: hidden;
 }
@@ -318,7 +319,7 @@
 
 /* Content Sections */
 .content-section {
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-xxl);  /* 섹션 간격 증가 */
 }
 
 .content-section:last-child {
@@ -329,18 +330,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--color-primary);  /* 섹션 헤더에 선 추가 */
 }
 
 .section-header h2,
 .section-header h3 {
     margin: 0;
+    font-weight: 500;
+    letter-spacing: -0.01em;
 }
 
 .section-toggle {
     background: none;
     border: none;
-    color: var(--color-secondary);
+    color: var(--color-primary);  /* 검정색으로 변경 */
     cursor: pointer;
     padding: var(--spacing-xs);
     display: flex;
@@ -353,7 +358,7 @@
 }
 
 .section-toggle:hover {
-    color: var(--color-primary);
+    opacity: 0.6;
 }
 
 .section-toggle.collapsed {
@@ -366,8 +371,8 @@
 }
 
 .section-content {
-    border: 1px solid var(--color-light);
-    padding: var(--spacing-md);
+    border: none;  /* 테두리 제거 */
+    padding: var(--spacing-lg) 0;  /* 위아래 패딩만 */
     transition: all 0.3s ease;
     overflow: hidden;
 }
@@ -377,7 +382,6 @@
     opacity: 0;
     padding-top: 0;
     padding-bottom: 0;
-    border: none;
 }
 
 .content-subsection {
@@ -403,15 +407,40 @@
 .content-meta {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
     font-size: 0.75rem;
     color: var(--color-secondary);
+}
+
+.meta-date {
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
 
 .meta-separator {
-    margin: 0 var(--spacing-sm);
     color: var(--color-tertiary);
+}
+
+.meta-keyword {
+    display: inline-block;
+    padding: 2px 6px;  /* 패딩 대폭 축소 */
+    background-color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    color: var(--color-background);
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 0.625rem;  /* 폰트 크기 축소 */
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.meta-keyword:hover {
+    background-color: var(--color-background);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
 }
 
 .meta-category {
@@ -475,23 +504,28 @@
 
 /* Info Box */
 .info-box {
-    background-color: rgba(0, 0, 0, 0.02);
-    border-left: 3px solid var(--color-accent);
-    padding: var(--spacing-md);
+    background-color: transparent;  /* 배경 제거 */
+    border-left: 2px solid var(--color-primary);  /* 왼쪽 선을 검정으로 */
+    padding: var(--spacing-md) 0 var(--spacing-md) var(--spacing-lg);  /* 패딩 조정 */
     margin: var(--spacing-lg) 0;
-    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    border-radius: 0;
 }
 
 .info-box h4 {
     margin-top: 0;
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
     color: var(--color-primary);
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
 .info-box p {
     margin-bottom: 0;
     font-size: 0.875rem;
     line-height: 1.6;
+    color: var(--color-secondary);
 }
 
 /* Quote */
@@ -577,12 +611,16 @@
     }
     
     .content-meta {
-        flex-wrap: wrap;
         gap: var(--spacing-xs);
     }
     
     .meta-separator {
-        display: none;
+        display: inline;
+    }
+    
+    .meta-keyword {
+        font-size: 0.6rem;
+        padding: 2px 4px;
     }
 }
 

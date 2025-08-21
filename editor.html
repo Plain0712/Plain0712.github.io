@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki Editor - Plain0712</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="editor.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="wiki-header">
+        <div class="header-container">
+            <a href="index.html" class="nav-home">PLAIN0712</a>
+            <div class="nav-breadcrumb">
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">EDITOR</span>
+            </div>
+            <div class="nav-meta">
+                <span class="nav-date">AUG.2024</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="editor-container">
+        <div class="editor-wrapper">
+            <div class="editor-header">
+                <h1 class="editor-title">위키 페이지 편집기</h1>
+                <div class="editor-actions">
+                    <button class="btn-secondary" id="preview-btn">미리보기</button>
+                    <button class="btn-primary" id="generate-btn">데이터 생성</button>
+                </div>
+            </div>
+
+            <form class="editor-form" id="wiki-form">
+                <div class="form-group">
+                    <label for="page-title">제목</label>
+                    <input type="text" id="page-title" class="form-input" placeholder="페이지 제목을 입력하세요" required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="page-description">설명</label>
+                    <textarea id="page-description" class="form-textarea" rows="3" placeholder="페이지에 대한 간단한 설명을 입력하세요" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="page-keywords">키워드</label>
+                    <input type="text" id="page-keywords" class="form-input" placeholder="키워드를 쉼표로 구분해서 입력하세요 (예: 타이포그래피, 디자인, 스위스)" required>
+                </div>
+
+
+                <div class="form-group">
+                    <label>페이지 내용</label>
+                    <div class="editor-toolbar">
+                        <button type="button" class="toolbar-button" data-command="bold"><b>B</b></button>
+                        <button type="button" class="toolbar-button" data-command="italic"><i>I</i></button>
+                        <select class="toolbar-select" data-command="fontSize">
+                            <option value="1">10px</option>
+                            <option value="2">13px</option>
+                            <option value="3" selected>16px</option>
+                            <option value="4">18px</option>
+                            <option value="5">24px</option>
+                            <option value="6">32px</option>
+                            <option value="7">48px</option>
+                        </select>
+                    </div>
+                    <div class="content-editor">
+                        <div class="section-template" data-section="overview">
+                            <div class="section-header-edit">
+                                <h3>개요</h3>
+                                <button type="button" class="remove-section">×</button>
+                            </div>
+                            <div class="section-content-edit" contenteditable="true" placeholder="개요 내용을 입력하세요"></div>
+                        </div>
+
+                        <div class="section-template" data-section="features">
+                            <div class="section-header-edit">
+                                <h3>주요 특징</h3>
+                                <button type="button" class="remove-section">×</button>
+                            </div>
+                            <div class="section-content-edit" contenteditable="true" placeholder="주요 특징 내용을 입력하세요"></div>
+                        </div>
+
+                        <div class="add-section-area">
+                            <button type="button" class="btn-add-section" id="add-section-btn">+ 섹션 추가</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="output-section" id="output-section" style="display: none;">
+                <h2>생성된 데이터</h2>
+                <div class="output-tabs">
+                    <button class="tab-button active" data-tab="search-data">검색 데이터</button>
+                    <button class="tab-button" data-tab="html-content">HTML 내용</button>
+                </div>
+                
+                <div class="tab-content active" id="search-data-tab">
+                    <pre id="search-data-output"></pre>
+                    <button class="btn-copy" id="copy-search-data">복사</button>
+                </div>
+                
+                <div class="tab-content" id="html-content-tab">
+                    <pre id="html-content-output"></pre>
+                    <button class="btn-copy" id="copy-html-content">복사</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="editor.js"></script>
+</body>
+</html>
