@@ -210,6 +210,59 @@
     width: 100%;
 }
 
+/* Page Intro Section */
+.page-intro-section {
+    margin: var(--spacing-xxl) 0;
+    padding: var(--spacing-xl) 0;
+    position: relative;
+}
+
+.page-intro-content {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-primary);
+    max-width: none;
+}
+
+.page-intro-content p {
+    margin: 0 0 var(--spacing-md) 0;
+}
+
+.page-intro-content p:last-child {
+    margin-bottom: 0;
+}
+
+.page-intro-content:focus {
+    outline: none;
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.page-intro-content:empty::before {
+    content: '페이지 소개 내용을 입력하세요...';
+    color: var(--color-tertiary);
+    font-style: italic;
+}
+
+/* Edit mode styles */
+.page-intro-section.edit-mode .page-intro-content {
+    border: 1px dashed var(--color-light);
+    padding: var(--spacing-md);
+    border-radius: 2px;
+    cursor: text;
+}
+
+.page-intro-section.edit-mode::before {
+    content: '편집 가능';
+    position: absolute;
+    top: var(--spacing-xs);
+    right: var(--spacing-xs);
+    font-size: 0.625rem;
+    color: var(--color-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+}
+
 /* Table of Contents */
 .table-of-contents {
     margin-bottom: var(--spacing-xxl);

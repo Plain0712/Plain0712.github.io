@@ -29,6 +29,7 @@
             <div class="editor-header">
                 <h1 class="editor-title">위키 페이지 편집기</h1>
                 <div class="editor-actions">
+                    <button class="btn-secondary" id="load-btn">페이지 불러오기</button>
                     <button class="btn-secondary" id="preview-btn">미리보기</button>
                     <button class="btn-primary" id="generate-btn">데이터 생성</button>
                 </div>
@@ -51,41 +52,226 @@
                     <input type="text" id="page-keywords" class="form-input" placeholder="키워드를 쉼표로 구분해서 입력하세요 (예: 타이포그래피, 디자인, 스위스)" required>
                 </div>
 
-
                 <div class="form-group">
-                    <label>페이지 내용</label>
+                    <label>텍스트 편집 도구</label>
                     <div class="editor-toolbar">
-                        <button type="button" class="toolbar-button" data-command="bold"><b>B</b></button>
-                        <button type="button" class="toolbar-button" data-command="italic"><i>I</i></button>
-                        <select class="toolbar-select" data-command="fontSize">
-                            <option value="1">10px</option>
-                            <option value="2">13px</option>
-                            <option value="3" selected>16px</option>
-                            <option value="4">18px</option>
-                            <option value="5">24px</option>
-                            <option value="6">32px</option>
-                            <option value="7">48px</option>
-                        </select>
+                        <!-- 텍스트 서식 -->
+                        <div class="toolbar-group">
+                            <button type="button" class="toolbar-button" data-command="bold" title="굵게">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path>
+                                    <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path>
+                                </svg>
+                            </button>
+                            <button type="button" class="toolbar-button" data-command="italic" title="기울임">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="19" y1="4" x2="10" y2="4"></line>
+                                    <line x1="14" y1="20" x2="5" y2="20"></line>
+                                    <line x1="15" y1="4" x2="9" y2="20"></line>
+                                </svg>
+                            </button>
+                            <button type="button" class="toolbar-button" data-command="underline" title="밑줄">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"></path>
+                                    <line x1="4" y1="21" x2="20" y2="21"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <div class="toolbar-separator"></div>
+                        
+                        <!-- 폰트 크기 -->
+                        <div class="toolbar-group">
+                            <select class="toolbar-select" data-command="fontSize" title="폰트 크기">
+                                <option value="1">10px</option>
+                                <option value="2">12px</option>
+                                <option value="3" selected>14px</option>
+                                <option value="4">16px</option>
+                                <option value="5">18px</option>
+                                <option value="6">24px</option>
+                                <option value="7">32px</option>
+                            </select>
+                        </div>
+                        
+                        <div class="toolbar-separator"></div>
+                        
+                        <!-- 색상 -->
+                        <div class="toolbar-group">
+                            <div class="color-picker-wrapper">
+                                <button type="button" class="toolbar-button color-button" data-command="foreColor" title="텍스트 색상">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M4 7V4h16v3M9 20h6M12 4v16"></path>
+                                    </svg>
+                                    <div class="color-indicator" id="text-color-indicator"></div>
+                                </button>
+                                <input type="color" class="color-input" id="text-color" value="#000000">
+                            </div>
+                            
+                            <div class="color-picker-wrapper">
+                                <button type="button" class="toolbar-button color-button" data-command="hiliteColor" title="하이라이터">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 11l3 3L22 4"></path>
+                                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7"></path>
+                                    </svg>
+                                    <div class="color-indicator" id="highlight-color-indicator"></div>
+                                </button>
+                                <input type="color" class="color-input" id="highlight-color" value="#ffff00">
+                            </div>
+                        </div>
+                        
+                        <div class="toolbar-separator"></div>
+                        
+                        <!-- 정렬 -->
+                        <div class="toolbar-group">
+                            <button type="button" class="toolbar-button" data-command="justifyLeft" title="왼쪽 정렬">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="17" y1="10" x2="3" y2="10"></line>
+                                    <line x1="21" y1="6" x2="3" y2="6"></line>
+                                    <line x1="21" y1="14" x2="3" y2="14"></line>
+                                    <line x1="17" y1="18" x2="3" y2="18"></line>
+                                </svg>
+                            </button>
+                            <button type="button" class="toolbar-button" data-command="justifyCenter" title="가운데 정렬">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="10" x2="6" y2="10"></line>
+                                    <line x1="21" y1="6" x2="3" y2="6"></line>
+                                    <line x1="21" y1="14" x2="3" y2="14"></line>
+                                    <line x1="18" y1="18" x2="6" y2="18"></line>
+                                </svg>
+                            </button>
+                            <button type="button" class="toolbar-button" data-command="justifyRight" title="오른쪽 정렬">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="21" y1="10" x2="7" y2="10"></line>
+                                    <line x1="21" y1="6" x2="3" y2="6"></line>
+                                    <line x1="21" y1="14" x2="3" y2="14"></line>
+                                    <line x1="21" y1="18" x2="7" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <div class="toolbar-separator"></div>
+                        
+                        <!-- 리스트 -->
+                        <div class="toolbar-group">
+                            <button type="button" class="toolbar-button" data-command="insertUnorderedList" title="글머리 기호">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="8" y1="6" x2="21" y2="6"></line>
+                                    <line x1="8" y1="12" x2="21" y2="12"></line>
+                                    <line x1="8" y1="18" x2="21" y2="18"></line>
+                                    <line x1="3" y1="6" x2="3" y2="6"></line>
+                                    <line x1="3" y1="12" x2="3" y2="12"></line>
+                                    <line x1="3" y1="18" x2="3" y2="18"></line>
+                                </svg>
+                            </button>
+                            <button type="button" class="toolbar-button" data-command="insertOrderedList" title="번호 매기기">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="10" y1="6" x2="21" y2="6"></line>
+                                    <line x1="10" y1="12" x2="21" y2="12"></line>
+                                    <line x1="10" y1="18" x2="21" y2="18"></line>
+                                    <path d="M4 6h1v4"></path>
+                                    <path d="M4 10h2"></path>
+                                    <path d="M6 18H4c0-1 0-2 1-3s1-1 1-1"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <div class="toolbar-separator"></div>
+                        
+                        <!-- 테이블, 링크 및 이미지 -->
+                        <div class="toolbar-group">
+                            <div class="table-insert-wrapper">
+                                <button type="button" class="toolbar-button" id="table-insert-btn" title="표 삽입">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"></path>
+                                    </svg>
+                                </button>
+                                <div class="table-grid-selector" id="table-grid-selector">
+                                    <div class="table-grid-header">
+                                        <span id="table-size-display">표 선택</span>
+                                    </div>
+                                    <div class="table-grid" id="table-grid"></div>
+                                    <div class="table-grid-footer">
+                                        <button type="button" class="table-custom-btn" id="table-custom-btn">사용자 정의 표...</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="toolbar-button" data-command="createLink" title="링크 삽입">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                                </svg>
+                            </button>
+                            <div class="image-upload-wrapper">
+                                <button type="button" class="toolbar-button" id="image-upload-btn" title="이미지 삽입">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                        <circle cx="9" cy="9" r="2"></circle>
+                                        <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+                                    </svg>
+                                </button>
+                                <input type="file" id="image-upload-input" accept="image/*" style="display: none;">
+                            </div>
+                        </div>
+                        
+                        <div class="toolbar-separator"></div>
+                        
+                        <!-- 기타 -->
+                        <div class="toolbar-group">
+                            <button type="button" class="toolbar-button" data-command="removeFormat" title="서식 제거">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 7V4h16v3M5 20h6M13 4v16"></path>
+                                    <path d="m15 15 5 5m-5 0 5-5"></path>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                    <div class="content-editor">
-                        <div class="section-template" data-section="overview">
-                            <div class="section-header-edit">
-                                <h3>개요</h3>
-                                <button type="button" class="remove-section">×</button>
-                            </div>
-                            <div class="section-content-edit" contenteditable="true" placeholder="개요 내용을 입력하세요"></div>
+                    
+                    <!-- 페이지 소개 영역 -->
+                    <div class="editor-section" style="margin-top: 20px;">
+                        <div class="section-header">
+                            <h4>페이지 소개</h4>
+                            <span class="section-desc">페이지 상단에 표시될 간단한 소개를 작성하세요</span>
                         </div>
-
-                        <div class="section-template" data-section="features">
-                            <div class="section-header-edit">
-                                <h3>주요 특징</h3>
-                                <button type="button" class="remove-section">×</button>
-                            </div>
-                            <div class="section-content-edit" contenteditable="true" placeholder="주요 특징 내용을 입력하세요"></div>
+                        <div class="section-content">
+                            <div id="page-intro" class="intro-content-edit" contenteditable="true" placeholder="페이지 소개 내용을 입력하세요..."></div>
                         </div>
+                    </div>
 
-                        <div class="add-section-area">
-                            <button type="button" class="btn-add-section" id="add-section-btn">+ 섹션 추가</button>
+                    <!-- 페이지 내용 영역 -->
+                    <div class="editor-section">
+                        <div class="section-header">
+                            <h4>페이지 내용</h4>
+                            <span class="section-desc">섹션별로 내용을 구성하여 작성하세요</span>
+                        </div>
+                        <div class="section-content">
+                            <div class="content-sections">
+                                <div class="section-template" data-section="overview">
+                                    <div class="section-header-edit">
+                                        <h4>개요</h4>
+                                        <button type="button" class="remove-section" title="섹션 삭제">×</button>
+                                    </div>
+                                    <div class="section-content-edit" contenteditable="true" placeholder="개요 내용을 입력하세요"></div>
+                                </div>
+
+                                <div class="section-template" data-section="features">
+                                    <div class="section-header-edit">
+                                        <h4>주요 특징</h4>
+                                        <button type="button" class="remove-section" title="섹션 삭제">×</button>
+                                    </div>
+                                    <div class="section-content-edit" contenteditable="true" placeholder="주요 특징 내용을 입력하세요"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="add-section-area">
+                                <button type="button" class="btn-add-section" id="add-section-btn">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                    </svg>
+                                    섹션 추가
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -110,6 +296,45 @@
             </div>
         </div>
     </main>
+
+    <!-- 속성 편집 사이드바 -->
+    <div class="property-panel" id="property-panel">
+        <div class="property-header">
+            <h4 id="property-title">속성 편집</h4>
+            <button class="property-close" id="property-close">&times;</button>
+        </div>
+        <div class="property-content" id="property-content">
+            <div class="property-empty">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="9" cy="9" r="2"></circle>
+                    <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+                </svg>
+                <p>이미지나 표를 클릭하면<br>속성을 편집할 수 있습니다</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 페이지 불러오기 모달 -->
+    <div class="modal-overlay" id="load-modal" style="display: none;">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>저장된 페이지 불러오기</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-content">
+                <div class="page-list" id="page-list">
+                    <div class="empty-state">
+                        <p>저장된 페이지가 없습니다.</p>
+                        <small>페이지를 작성하고 "데이터 생성" 버튼을 눌러 저장하세요.</small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="modal-cancel">취소</button>
+            </div>
+        </div>
+    </div>
 
     <script src="editor.js"></script>
 </body>
