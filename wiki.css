@@ -555,6 +555,10 @@
     text-decoration-thickness: 2px;
 }
 
+.content-body a.external-link {
+    color: var(--color-secondary);
+}
+
 /* Info Box */
 .info-box {
     background-color: transparent;  /* 배경 제거 */

@@ -344,42 +344,61 @@
     content: '';
 }
 
-/* 리스트 스타일 고정 */
+/* 리스트 스타일 재정의 */
 .section-content-edit ul,
 .section-content-edit ol {
-    padding-left: 0 !important;
-    margin: 0.5rem 0 !important;
+    list-style: none;
+    padding-left: 0;
+    margin: 0.5rem 0;
 }
 
 .section-content-edit li {
-    list-style-position: inside !important;
-    margin: 0.25rem 0 !important;
-    padding-left: 0 !important;
+    margin: 0.25rem 0;
 }
 
-.section-content-edit ul li {
-    list-style-type: disc !important;
+.section-content-edit ul > li::before {
+    content: '•';
+    margin-right: 0.6em;
+    display: inline-block; /* 정렬을 위해 */
 }
 
-.section-content-edit ol li {
-    list-style-type: decimal !important;
+.section-content-edit ol {
+    counter-reset: list-counter;
 }
 
-/* 중첩된 리스트 */
-.section-content-edit ul ul li {
-    list-style-type: circle !important;
+.section-content-edit ol > li {
+    counter-increment: list-counter;
 }
 
-.section-content-edit ul ul ul li {
-    list-style-type: square !important;
+.section-content-edit ol > li::before {
+    content: counter(list-counter) ".";
+    margin-right: 0.6em;
+    display: inline-block; /* 정렬을 위해 */
 }
 
-.section-content-edit ol ol li {
-    list-style-type: lower-alpha !important;
+/* 중첩 리스트 */
+.section-content-edit ul ul,
+.section-content-edit ol ol {
+    padding-left: 1.5em;
+    margin: 0;
 }
 
-.section-content-edit ol ol ol li {
-    list-style-type: lower-roman !important;
+.section-content-edit ul ul > li::before,
+.section-content-edit ol ol > li::before {
+    content: ''; /* 중첩 리스트는 기본 마커 사용을 위해 비움 */
+    margin-right: 0;
+}
+
+.section-content-edit ul ul { list-style-type: circle; }
+.section-content-edit ul ul ul { list-style-type: square; }
+.section-content-edit ol ol { list-style-type: lower-alpha; }
+.section-content-edit ol ol ol { list-style-type: lower-roman; }
+
+.section-content-edit ul ul,
+.section-content-edit ol ol,
+.section-content-edit ul ol,
+.section-content-edit ol ul {
+    list-style-position: inside; /* 중첩 리스트는 inside로 */
 }
 
 
@@ -1183,4 +1202,46 @@ table th:hover {
     border: 1px solid var(--color-light);
     padding: var(--spacing-lg);
     background: rgba(0, 0, 0, 0.01);
+}
+
+/* Code View Mode */
+.code-view-textarea {
+    width: 100%;
+    min-height: 200px;
+    border: 1px solid var(--color-light);
+    padding: var(--spacing-lg);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-primary);
+    background-color: #f8f8f8;
+    resize: vertical;
+    outline: none;
+    tab-size: 4;
+    -moz-tab-size: 4;
+}
+
+.toolbar-button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Code Block Styles */
+.section-content-edit pre,
+.intro-content-edit pre {
+    background-color: #f8f8f8;
+    border: 1px solid var(--color-light);
+    border-radius: 4px;
+    padding: var(--spacing-lg);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 1em 0;
+    font-size: 0.9em;
+}
+
+.section-content-edit code,
+.intro-content-edit code {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: transparent;
+    padding: 0;
 }

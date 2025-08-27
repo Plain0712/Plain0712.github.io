@@ -19,7 +19,7 @@
                 <span class="breadcrumb-current">EDITOR</span>
             </div>
             <div class="nav-meta">
-                <span class="nav-date">AUG.2024</span>
+                <span class="nav-date">AUG.2028</span>
             </div>
         </div>
     </header>
@@ -211,18 +211,36 @@
                                 </button>
                                 <input type="file" id="image-upload-input" accept="image/*" style="display: none;">
                             </div>
+                            <button type="button" class="toolbar-button" data-command="insertCodeBlock" title="코드 블록">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="16 18 22 12 16 6"></polyline>
+                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                </svg>
+                            </button>
                         </div>
                         
                         <div class="toolbar-separator"></div>
                         
                         <!-- 기타 -->
                         <div class="toolbar-group">
+                            <div class="toolbar-group">
                             <button type="button" class="toolbar-button" data-command="removeFormat" title="서식 제거">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M4 7V4h16v3M5 20h6M13 4v16"></path>
                                     <path d="m15 15 5 5m-5 0 5-5"></path>
                                 </svg>
                             </button>
+                        </div>
+                        <div class="toolbar-separator"></div>
+                        <!-- 모드 전환 -->
+                        <div class="toolbar-group">
+                            <button type="button" class="toolbar-button" id="mode-toggle-btn" title="코드 보기">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="16 18 22 12 16 6"></polyline>
+                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                </svg>
+                            </button>
+                        </div>
                         </div>
                     </div>
                     

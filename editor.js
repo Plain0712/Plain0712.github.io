@@ -95,6 +95,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            if (command === 'insertCodeBlock') {
+                insertCodeBlock();
+                return;
+            }
+
             let value = target.value;
             if (command === 'foreColor') {
                 value = textColorInput.value;
@@ -1961,4 +1966,54 @@ ${data.keywords.map(keyword => `                            <span class="tag">${
 
     // 요소 선택 시스템 초기화
     initElementSelection();
+
+    // ========== HTML/CSS 모드 전환 기능 ==========
+    const modeToggleBtn = document.getElementById('mode-toggle-btn');
+    let isCodeMode = false;
+
+    if (modeToggleBtn) {
+        modeToggleBtn.addEventListener('click', function() {
+            isCodeMode = !isCodeMode;
+            this.classList.toggle('active', isCodeMode);
+
+            const editableAreas = document.querySelectorAll('.section-content-edit, .intro-content-edit');
+
+            if (isCodeMode) {
+                // WYSIWYG -> Code Mode
+                this.title = "에디터 보기";
+                editableAreas.forEach(editorDiv => {
+                    const html = editorDiv.innerHTML;
+                    const textarea = document.createElement('textarea');
+                    textarea.className = 'code-view-textarea';
+                    textarea.value = html;
+                    
+                    editorDiv.style.display = 'none';
+                    editorDiv.parentNode.insertBefore(textarea, editorDiv.nextSibling);
+                });
+                // 툴바 비활성화
+                toolbar.querySelectorAll('button, select').forEach(el => {
+                    if (el.id !== 'mode-toggle-btn') {
+                        el.disabled = true;
+                        el.style.opacity = '0.5';
+                    }
+                });
+            } else {
+                // Code Mode -> WYSIWYG
+                this.title = "코드 보기";
+                editableAreas.forEach(editorDiv => {
+                    const textarea = editorDiv.nextElementSibling;
+                    if (textarea && textarea.classList.contains('code-view-textarea')) {
+                        editorDiv.innerHTML = textarea.value;
+                        textarea.remove();
+                    }
+                    editorDiv.style.display = 'block';
+                });
+                // 툴바 활성화
+                toolbar.querySelectorAll('button, select').forEach(el => {
+                    el.disabled = false;
+                    el.style.opacity = '1';
+                });
+            }
+        });
+    }
 });

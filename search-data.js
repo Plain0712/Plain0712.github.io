@@ -9,36 +9,6 @@ const searchData = [
         keywords: ['스위스', '타이포그래피', '디자인', '헬베티카', '미니멀리즘', 'swiss', 'typography'],
         lastModified: '2024-08-20',
         readTime: '5분'
-    },
-    {
-        id: 'github-pages',
-        title: 'GitHub Pages 배포',
-        url: '#',
-        category: '기술',
-        description: 'GitHub Pages를 이용한 정적 사이트 배포 방법과 설정에 대한 가이드입니다.',
-        keywords: ['깃헙', 'github', 'pages', '배포', '호스팅', 'deploy'],
-        lastModified: '2024-08-19',
-        readTime: '8분'
-    },
-    {
-        id: 'css-grid',
-        title: 'CSS Grid Layout',
-        url: '#',
-        category: '기술',
-        description: 'CSS Grid를 활용한 현대적인 웹 레이아웃 구성 방법에 대한 설명입니다.',
-        keywords: ['css', 'grid', '그리드', '레이아웃', 'layout', '웹디자인'],
-        lastModified: '2024-08-18',
-        readTime: '12분'
-    },
-    {
-        id: 'design-system',
-        title: '디자인 시스템',
-        url: '#',
-        category: '디자인',
-        description: '일관된 사용자 경험을 위한 디자인 시스템 구축과 관리 방법입니다.',
-        keywords: ['디자인', '시스템', 'design', 'system', 'ui', 'ux', '컴포넌트'],
-        lastModified: '2024-08-17',
-        readTime: '10분'
     }
 ];
 
