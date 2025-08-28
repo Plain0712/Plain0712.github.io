@@ -2016,4 +2016,74 @@ ${data.keywords.map(keyword => `                            <span class="tag">${
             }
         });
     }
+
+    // 코드 블록 삽입 함수
+    function insertCodeBlock() {
+        // 현재 포커스된 편집 가능한 요소 찾기
+        let activeEditor = null;
+        const editableElements = document.querySelectorAll('.section-content-edit, .intro-content-edit');
+        
+        editableElements.forEach(element => {
+            if (element === document.activeElement || element.contains(document.activeElement)) {
+                activeEditor = element;
+            }
+        });
+        
+        if (!activeEditor) {
+            // 활성 편집기가 없으면 첫 번째 편집기를 사용
+            activeEditor = editableElements[0];
+            if (!activeEditor) return;
+            activeEditor.focus();
+        }
+        
+        // HTML 직접 삽입 방식 사용
+        const codeBlockId = 'code-block-' + Date.now();
+        const codeBlockHTML = `
+            <div class="code-block-wrapper" data-language="javascript" data-theme="default" id="${codeBlockId}">
+                <div class="code-block-header">
+                    <span class="code-language">JavaScript</span>
+                    <button class="code-settings-btn" onclick="openCodeSettings('${codeBlockId}')">⚙️</button>
+                </div>
+                <div class="code-block-content">
+                    <div class="code-line-numbers">
+                        <span class="line-number">1</span>
+                    </div>
+                    <pre><code contenteditable="true" oninput="updateLineNumbers(this)" onkeydown="handleCodeInput(event)">// 여기에 코드를 입력하세요</code></pre>
+                </div>
+            </div>
+            <div><br></div>
+        `;
+        
+        // 현재 선택 영역에 삽입
+        const selection = window.getSelection();
+        if (selection.rangeCount > 0) {
+            const range = selection.getRangeAt(0);
+            range.deleteContents();
+            
+            const div = document.createElement('div');
+            div.innerHTML = codeBlockHTML;
+            
+            while (div.firstChild) {
+                range.insertNode(div.firstChild);
+            }
+        } else {
+            // 선택 영역이 없으면 끝에 추가
+            activeEditor.insertAdjacentHTML('beforeend', codeBlockHTML);
+        }
+        
+        // 삽입된 코드 요소 찾기 및 포커스
+        setTimeout(() => {
+            const newCodeElement = activeEditor.querySelector('pre:last-of-type code');
+            if (newCodeElement) {
+                newCodeElement.focus();
+                
+                // 텍스트 선택
+                const range = document.createRange();
+                range.selectNodeContents(newCodeElement);
+                const selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
+            }
+        }, 10);
+    }
 });
